@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0C66EB1C19FABD00411260 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66EA1C19FABD00411260 /* CalendarViewController.m */; };
+		5B0C66F31C19FC2500411260 /* CLWeeklyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66EE1C19FC2500411260 /* CLWeeklyCalendarView.m */; };
+		5B0C66F41C19FC2500411260 /* DailyCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66F01C19FC2500411260 /* DailyCalendarView.m */; };
+		5B0C66F51C19FC2500411260 /* DayTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66F21C19FC2500411260 /* DayTitleLabel.m */; };
+		5B0C66FE1C19FC2E00411260 /* NSDate+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66F71C19FC2E00411260 /* NSDate+CL.m */; };
+		5B0C66FF1C19FC2E00411260 /* NSDictionary+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66F91C19FC2E00411260 /* NSDictionary+CL.m */; };
+		5B0C67001C19FC2E00411260 /* UIColor+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66FB1C19FC2E00411260 /* UIColor+CL.m */; };
+		5B0C67011C19FC2E00411260 /* UIImage+CL.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C66FD1C19FC2E00411260 /* UIImage+CL.m */; };
 		5B9E77141C1903C1002610FB /* CraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E77131C1903C1002610FB /* CraftTests.swift */; };
 		5B9E771F1C1903C1002610FB /* CraftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9E771E1C1903C1002610FB /* CraftUITests.swift */; };
 		5BEB52BB1C1905F00013AF11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB52AB1C1905F00013AF11 /* AppDelegate.swift */; };
@@ -48,6 +56,22 @@
 
 /* Begin PBXFileReference section */
 		2AACC2237B09A6ED9EF4BFDB /* Pods-Craft.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Craft.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Craft/Pods-Craft.debug.xcconfig"; sourceTree = "<group>"; };
+		5B0C66EA1C19FABD00411260 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		5B0C66EC1C19FAE300411260 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		5B0C66ED1C19FC2500411260 /* CLWeeklyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLWeeklyCalendarView.h; path = CLWeeklyCalendarViewSourceCode/CLWeeklyCalendarView.h; sourceTree = "<group>"; };
+		5B0C66EE1C19FC2500411260 /* CLWeeklyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLWeeklyCalendarView.m; path = CLWeeklyCalendarViewSourceCode/CLWeeklyCalendarView.m; sourceTree = "<group>"; };
+		5B0C66EF1C19FC2500411260 /* DailyCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DailyCalendarView.h; path = CLWeeklyCalendarViewSourceCode/DailyCalendarView.h; sourceTree = "<group>"; };
+		5B0C66F01C19FC2500411260 /* DailyCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DailyCalendarView.m; path = CLWeeklyCalendarViewSourceCode/DailyCalendarView.m; sourceTree = "<group>"; };
+		5B0C66F11C19FC2500411260 /* DayTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DayTitleLabel.h; path = CLWeeklyCalendarViewSourceCode/DayTitleLabel.h; sourceTree = "<group>"; };
+		5B0C66F21C19FC2500411260 /* DayTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DayTitleLabel.m; path = CLWeeklyCalendarViewSourceCode/DayTitleLabel.m; sourceTree = "<group>"; };
+		5B0C66F61C19FC2E00411260 /* NSDate+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CL.h"; path = "CLWeeklyCalendarViewSourceCode/Misc/NSDate+CL.h"; sourceTree = "<group>"; };
+		5B0C66F71C19FC2E00411260 /* NSDate+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CL.m"; path = "CLWeeklyCalendarViewSourceCode/Misc/NSDate+CL.m"; sourceTree = "<group>"; };
+		5B0C66F81C19FC2E00411260 /* NSDictionary+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CL.h"; path = "CLWeeklyCalendarViewSourceCode/Misc/NSDictionary+CL.h"; sourceTree = "<group>"; };
+		5B0C66F91C19FC2E00411260 /* NSDictionary+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CL.m"; path = "CLWeeklyCalendarViewSourceCode/Misc/NSDictionary+CL.m"; sourceTree = "<group>"; };
+		5B0C66FA1C19FC2E00411260 /* UIColor+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CL.h"; path = "CLWeeklyCalendarViewSourceCode/Misc/UIColor+CL.h"; sourceTree = "<group>"; };
+		5B0C66FB1C19FC2E00411260 /* UIColor+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CL.m"; path = "CLWeeklyCalendarViewSourceCode/Misc/UIColor+CL.m"; sourceTree = "<group>"; };
+		5B0C66FC1C19FC2E00411260 /* UIImage+CL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+CL.h"; path = "CLWeeklyCalendarViewSourceCode/Misc/UIImage+CL.h"; sourceTree = "<group>"; };
+		5B0C66FD1C19FC2E00411260 /* UIImage+CL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CL.m"; path = "CLWeeklyCalendarViewSourceCode/Misc/UIImage+CL.m"; sourceTree = "<group>"; };
 		5B9E76FB1C1903C1002610FB /* Craft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Craft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B9E770F1C1903C1002610FB /* CraftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CraftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B9E77131C1903C1002610FB /* CraftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraftTests.swift; sourceTree = "<group>"; };
@@ -111,6 +135,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5B0C67021C19FE6F00411260 /* CLWeeklyCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C66ED1C19FC2500411260 /* CLWeeklyCalendarView.h */,
+				5B0C66EE1C19FC2500411260 /* CLWeeklyCalendarView.m */,
+				5B0C66EF1C19FC2500411260 /* DailyCalendarView.h */,
+				5B0C66F01C19FC2500411260 /* DailyCalendarView.m */,
+				5B0C66F11C19FC2500411260 /* DayTitleLabel.h */,
+				5B0C66F21C19FC2500411260 /* DayTitleLabel.m */,
+				5B0C66F61C19FC2E00411260 /* NSDate+CL.h */,
+				5B0C66F71C19FC2E00411260 /* NSDate+CL.m */,
+				5B0C66F81C19FC2E00411260 /* NSDictionary+CL.h */,
+				5B0C66F91C19FC2E00411260 /* NSDictionary+CL.m */,
+				5B0C66FA1C19FC2E00411260 /* UIColor+CL.h */,
+				5B0C66FB1C19FC2E00411260 /* UIColor+CL.m */,
+				5B0C66FC1C19FC2E00411260 /* UIImage+CL.h */,
+				5B0C66FD1C19FC2E00411260 /* UIImage+CL.m */,
+			);
+			name = CLWeeklyCalendarView;
+			sourceTree = "<group>";
+		};
 		5B9E76F21C1903C1002610FB = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +194,9 @@
 				5BEB52AC1C1905F00013AF11 /* Assets.xcassets */,
 				5BEB52CB1C1906FA0013AF11 /* LaunchScreen.storyboard */,
 				5BEB52B11C1905F00013AF11 /* Info.plist */,
+				5B0C66EA1C19FABD00411260 /* CalendarViewController.m */,
+				5B0C66EC1C19FAE300411260 /* CalendarViewController.h */,
+				5B0C67021C19FE6F00411260 /* CLWeeklyCalendarView */,
 			);
 			path = Craft;
 			sourceTree = "<group>";
@@ -379,11 +427,19 @@
 			files = (
 				5BEB52C61C1905F00013AF11 /* ResetPasswordViewController.swift in Sources */,
 				5BEB52BB1C1905F00013AF11 /* AppDelegate.swift in Sources */,
+				5B0C67001C19FC2E00411260 /* UIColor+CL.m in Sources */,
 				5BEB52C31C1905F00013AF11 /* MenuViewController.swift in Sources */,
 				5BEB52BE1C1905F00013AF11 /* EnterRestaurantIDViewController.swift in Sources */,
 				5BEB52BF1C1905F00013AF11 /* HomeTableCell.swift in Sources */,
+				5B0C66F51C19FC2500411260 /* DayTitleLabel.m in Sources */,
 				5BEB52C71C1905F00013AF11 /* ScheduleTableCell.swift in Sources */,
+				5B0C66FE1C19FC2E00411260 /* NSDate+CL.m in Sources */,
+				5B0C66F41C19FC2500411260 /* DailyCalendarView.m in Sources */,
+				5B0C66EB1C19FABD00411260 /* CalendarViewController.m in Sources */,
+				5B0C66F31C19FC2500411260 /* CLWeeklyCalendarView.m in Sources */,
 				5BEB52C41C1905F00013AF11 /* PFUserExtension.swift in Sources */,
+				5B0C67011C19FC2E00411260 /* UIImage+CL.m in Sources */,
+				5B0C66FF1C19FC2E00411260 /* NSDictionary+CL.m in Sources */,
 				5BEB52C21C1905F00013AF11 /* LoginViewController.swift in Sources */,
 				5BEB52C51C1905F00013AF11 /* RegisterRestaurantViewController.swift in Sources */,
 				5BEB52CA1C1905F00013AF11 /* SignupViewController.swift in Sources */,

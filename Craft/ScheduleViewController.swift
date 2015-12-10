@@ -9,31 +9,34 @@
 import UIKit
 import Parse
 
-class ScheduleViewController: UITableViewController {
+@objc class ScheduleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var scheduleArray = [AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadSchedule()
+        loadSchedule(NSDate())
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func refreshTable(sender: UIRefreshControl) {
-        loadSchedule()
+    func refreshTable(sender: UIRefreshControl) {
+        loadSchedule(NSDate())
         sender.endRefreshing()
     }
     
     
-    func loadSchedule() {
+    func loadSchedule(date: NSDate) {
         let query = PFQuery(className:"employee")
         query.whereKey("restaurantID", equalTo: (PFUser.currentUser()?.getRestaurantID())!)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
@@ -46,10 +49,17 @@ class ScheduleViewController: UITableViewController {
                         instance["AM"] = object["AM"] as? String
                         instance["PM"] = object["PM"] as? String
                         instance["NAME"] = object["NAME"] as? String
+                        let parseDate = object["Date"] as! NSDate
                         
-                        self.scheduleArray.append(instance)
-                        self.tableView.reloadData()
+                        let calendar = NSCalendar.currentCalendar()
+                        let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
+                        let parseDateComponents = calendar.components([.Year, .Month, .Day], fromDate: parseDate)
+                        
+                        if dateComponents == parseDateComponents {
+                            self.scheduleArray.append(instance)
+                        }
                     }
+                    self.tableView.reloadData()
                 }
             } else {
                 print("Error: \(error!) \(error!.userInfo)")
@@ -57,15 +67,15 @@ class ScheduleViewController: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return scheduleArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleCell", forIndexPath: indexPath) as! ScheduleTableCell
         
             if let object = scheduleArray[indexPath.row] as? Dictionary<String, String> {
@@ -86,6 +96,11 @@ class ScheduleViewController: UITableViewController {
             }
         
         return cell
+    }
+    
+    @IBAction func viewCalendar(sender: UIButton) {
+        let url = NSURL(string: "calshow://")
+        UIApplication.sharedApplication().openURL(url!)
     }
     
     
