@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class RegisterRestaurantViewController: UIViewController {
+class RegisterRestaurantViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var checkBox: UIImageView!
     @IBOutlet weak var emailTextField: UITextField!
@@ -24,8 +24,49 @@ class RegisterRestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTextField.delegate = self
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        restaurantNameTextField.delegate = self
+        restaurantIDTextField.delegate = self
+        phoneNumberTextField.delegate = self
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            if validateEmailAddress() {
+                textField.resignFirstResponder()
+                usernameTextField.becomeFirstResponder()
+            }
+        } else if textField == usernameTextField {
+            if validateUsername() {
+                textField.resignFirstResponder()
+                passwordTextField.becomeFirstResponder()
+            }
+        } else if textField == passwordTextField {
+            if validatePassword() {
+                textField.resignFirstResponder()
+                restaurantNameTextField.becomeFirstResponder()
+            }
+        } else if textField == restaurantNameTextField {
+            if validateRestaurantName() {
+                textField.resignFirstResponder()
+                restaurantIDTextField.becomeFirstResponder()
+            }
+        } else if textField == restaurantIDTextField {
+            if validateId() {
+                textField.resignFirstResponder()
+                phoneNumberTextField.becomeFirstResponder()
+            }
+        } else if textField == phoneNumberTextField {
+            if validatePhoneNumber() {
+                textField.resignFirstResponder()
+            }
+        }
+        return true
     }
     
     func dismissKeyboard() {
@@ -46,48 +87,13 @@ class RegisterRestaurantViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func registerButtonClicked(sender: UIButton) {
+    @IBAction func registerButtonClicked(sender: AnyObject) {
         if checked {
-            let username = self.usernameTextField.text
-            let password = self.passwordTextField.text
-            let email = self.emailTextField.text
-            let phoneNumber = self.phoneNumberTextField.text
-            let finalEmail = email!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let id = restaurantIDTextField.text
-            
-            // Validate the text fields
-            if username!.characters.count < 5 {
-                let alert = UIAlertController(title: "Invalid", message: "Username must be greater than 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-                
-            } else if password!.characters.count < 8 {
-                let alert = UIAlertController(title: "Invalid", message: "Password must be greater than 8 characters", preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-                
-            } else if email!.characters.count < 8 {
-                let alert = UIAlertController(title: "Invalid", message: "Please enter a valid email address", preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-            } else if id?.characters.count < 5 {
-                let alert = UIAlertController(title: "Invalid", message: "Restaurant ID must be greater than 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-            } else if phoneNumber?.characters.count < 10 {
-                let alert = UIAlertController(title: "Invalid", message: "Invalid phone number", preferredStyle: UIAlertControllerStyle.Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction)
-                self.presentViewController(alert, animated: true, completion: nil)
-            } else {
+            if validateEmailAddress() && validateUsername() && validatePassword() && validateRestaurantName() && validateId() && validatePhoneNumber() {
                 let newUser = PFUser()
-                newUser.username = username
-                newUser.password = password
-                newUser.email = finalEmail
+                newUser.username = usernameTextField.text
+                newUser.password = passwordTextField.text
+                newUser.email = emailTextField.text
                 
                 let query = PFQuery(className: "RestaurantIdentification")
                 query.whereKey("restaurantID", equalTo: self.restaurantIDTextField.text!)
@@ -137,4 +143,71 @@ class RegisterRestaurantViewController: UIViewController {
             self.presentViewController(checkBoxAlert, animated: true, completion: nil)
         }
     }
+    
+    func validateEmailAddress() -> Bool {
+        if emailTextField.text!.characters.count < 8 {
+            let alert = UIAlertController(title: "Invalid", message: "Please enter a valid email address", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func validateUsername() -> Bool {
+        if usernameTextField.text!.characters.count < 5 {
+            let alert = UIAlertController(title: "Invalid", message: "Username must be greater than 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func validatePassword() -> Bool {
+        if passwordTextField.text!.characters.count < 8 {
+            let alert = UIAlertController(title: "Invalid", message: "Password must be greater than 8 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func validateId() -> Bool {
+        if restaurantIDTextField.text?.characters.count < 5 {
+            let alert = UIAlertController(title: "Invalid", message: "Restaurant ID must be greater than 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func validateRestaurantName() -> Bool {
+        if restaurantNameTextField.text?.characters.count < 5 {
+            let alert = UIAlertController(title: "Invalid", message: "Restaurant Name must be greater than 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
+    func validatePhoneNumber() -> Bool {
+        if phoneNumberTextField.text?.characters.count < 10 {
+            let alert = UIAlertController(title: "Invalid", message: "Invalid phone number", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
+    
 }

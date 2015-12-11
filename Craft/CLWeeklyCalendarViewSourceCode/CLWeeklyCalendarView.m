@@ -28,10 +28,10 @@
 #define DATE_LABEL_INFO_WIDTH 160.f
 #define DATE_LABEL_INFO_HEIGHT 40.f
 
-#define WEATHER_ICON_WIDTH 20
-#define WEATHER_ICON_HEIGHT 20
-#define WEATHER_ICON_LEFT 90
-#define WEATHER_ICON_MARGIN_TOP 9
+#define WEATHER_ICON_WIDTH 0
+#define WEATHER_ICON_HEIGHT 0
+#define WEATHER_ICON_LEFT 0
+#define WEATHER_ICON_MARGIN_TOP 0
 
 //Attribute Keys
 NSString *const CLCalendarWeekStartDay = @"CLCalendarWeekStartDay";

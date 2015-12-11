@@ -38,6 +38,7 @@ import Parse
     
     func loadSchedule(date: NSDate) {
         let query = PFQuery(className:"employee")
+        query.orderByAscending("NAME")
         query.whereKey("restaurantID", equalTo: (PFUser.currentUser()?.getRestaurantID())!)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {

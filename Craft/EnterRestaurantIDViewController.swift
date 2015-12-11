@@ -13,6 +13,17 @@ class EnterRestaurantIDViewController: UIViewController {
     
     @IBOutlet weak var restaurantIDTextField: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func continueButtonClicked(sender: UIButton) {
         let query = PFQuery(className: "RestaurantIdentification")
         let id = self.restaurantIDTextField.text

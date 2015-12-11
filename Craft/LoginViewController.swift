@@ -12,7 +12,7 @@ import Parse
 import ParseUI
 import ParseFacebookUtilsV4
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,7 +21,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
     }
@@ -32,6 +34,21 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == usernameTextField {
+            if validateUsername() {
+                textField.resignFirstResponder()
+                passwordTextField.becomeFirstResponder()
+            }
+        } else if textField == passwordTextField {
+            if validatePassword() {
+                textField.resignFirstResponder()
+                loginButtonClicked(passwordTextField)
+            }
+        }
+        return true
+    }
+    
     func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -40,39 +57,20 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
-    @IBAction func loginButtonClicked(sender: UIButton) {
-        let username = self.usernameTextField.text
-        let password = self.passwordTextField.text
-        
-        if username!.characters.count < 5 {
-            let alert = UIAlertController(title: "Invalid", message: "Username must be at least 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(defaultAction)
-            presentViewController(alert, animated: true, completion: nil)
-            
-        } else if password!.characters.count < 8 {
-            let alert = UIAlertController(title: "Invalid", message: "Password must be at least 8 characters", preferredStyle: UIAlertControllerStyle.Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(defaultAction)
-            presentViewController(alert, animated: true, completion: nil)
-            
-        } else {
-            let spinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 150)) as UIActivityIndicatorView
-            spinner.startAnimating()
-            
-            PFUser.logInWithUsernameInBackground(username!, password: password!, block: { (user, error) -> Void in
-                spinner.stopAnimating()
-                
-                if ((user) != nil) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    
-                } else {
-                    let alert = UIAlertController(title: "Error", message: "Incorrect username or password", preferredStyle: UIAlertControllerStyle.Alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(defaultAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            })
+    @IBAction func loginButtonClicked(sender: AnyObject) {
+        if validateUsername() {
+            if validatePassword() {
+                PFUser.logInWithUsernameInBackground(usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) -> Void in
+                    if ((user) != nil) {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Error", message: "Incorrect username or password", preferredStyle: UIAlertControllerStyle.Alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alert.addAction(defaultAction)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                })
+            }
         }
     }
 
@@ -90,12 +88,32 @@ class LoginViewController: UIViewController {
         })
     }
     
+    func validateUsername() -> Bool {
+        if self.usernameTextField.text!.characters.count < 5 {
+            let alert = UIAlertController(title: "Invalid", message: "Username must be at least 5 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
     
+    func validatePassword() -> Bool {
+        if passwordTextField.text!.characters.count < 8 {
+            let alert = UIAlertController(title: "Invalid", message: "Password must be at least 8 characters", preferredStyle: UIAlertControllerStyle.Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(defaultAction)
+            presentViewController(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "signupSegue" {
-            let controller = segue.destinationViewController as! SignupViewController
-            controller.username = self.usernameTextField.text
+//            let controller = segue.destinationViewController as! SignupViewController
+//            controller.username = self.usernameTextField.text
         }
     }
     

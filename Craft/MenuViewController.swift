@@ -34,6 +34,7 @@ class MenuViewController: UITableViewController {
     
     func loadSchedule() {
         let query = PFQuery(className:"menu")
+        query.orderByAscending("Name")
         query.whereKey("restaurantID", equalTo: (PFUser.currentUser()?.getRestaurantID())!)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             if error == nil {
